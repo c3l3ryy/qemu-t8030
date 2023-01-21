@@ -865,19 +865,6 @@ SRST
     Display the vcpu dirty rate information.
 ERST
 
-    {
-        .name       = "vcpu_dirty_limit",
-        .args_type  = "",
-        .params     = "",
-        .help       = "show dirty page limit information of all vCPU",
-        .cmd        = hmp_info_vcpu_dirty_limit,
-    },
-
-SRST
-  ``info vcpu_dirty_limit``
-    Display the vcpu dirty page limit information.
-ERST
-
 #if defined(TARGET_I386)
     {
         .name       = "sgx",
@@ -893,7 +880,7 @@ SRST
     Show intel SGX information.
 ERST
 
-#if defined(CONFIG_MOS6522)
+#if defined(TARGET_M68K) || defined(TARGET_PPC)
     {
         .name         = "via",
         .args_type    = "",
@@ -921,18 +908,4 @@ ERST
 SRST
   ``info dart``
     Show guest Apple DART IOMMUs.
-ERST
-
-    {
-        .name       = "stats",
-        .args_type  = "target:s,names:s?,provider:s?",
-        .params     = "target [names] [provider]",
-        .help       = "show statistics for the given target (vm or vcpu); optionally filter by"
-                      "name (comma-separated list, or * for all) and provider",
-        .cmd        = hmp_info_stats,
-    },
-
-SRST
-  ``stats``
-    Show runtime-collected statistics
 ERST
