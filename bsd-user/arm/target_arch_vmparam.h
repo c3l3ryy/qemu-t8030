@@ -16,9 +16,8 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
-
-#ifndef TARGET_ARCH_VMPARAM_H
-#define TARGET_ARCH_VMPARAM_H
+#ifndef _TARGET_ARCH_VMPARAM_H_
+#define _TARGET_ARCH_VMPARAM_H_
 
 #include "cpu.h"
 
@@ -46,4 +45,4 @@ static inline void set_second_rval(CPUARMState *state, abi_ulong retval2)
     state->regs[1] = retval2;
 }
 
-#endif /* TARGET_ARCH_VMPARAM_H */
+#endif  /* ! _TARGET_ARCH_VMPARAM_H_ */

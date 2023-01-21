@@ -135,7 +135,7 @@ size_t bdrv_opt_mem_align(BlockDriverState *bs)
 {
     if (!bs || !bs->drv) {
         /* page size or 4k (hdd sector size) should be on the safe side */
-        return MAX(4096, qemu_real_host_page_size());
+        return MAX(4096, qemu_real_host_page_size);
     }
     IO_CODE();
 
@@ -146,7 +146,7 @@ size_t bdrv_min_mem_align(BlockDriverState *bs)
 {
     if (!bs || !bs->drv) {
         /* page size or 4k (hdd sector size) should be on the safe side */
-        return MAX(4096, qemu_real_host_page_size());
+        return MAX(4096, qemu_real_host_page_size);
     }
     IO_CODE();
 
@@ -1037,7 +1037,7 @@ static int find_image_format(BlockBackend *file, const char *filename,
         return ret;
     }
 
-    ret = blk_pread(file, 0, sizeof(buf), buf, 0);
+    ret = blk_pread(file, 0, buf, sizeof(buf));
     if (ret < 0) {
         error_setg_errno(errp, -ret, "Could not read image for determining its "
                          "format");
@@ -1045,16 +1045,14 @@ static int find_image_format(BlockBackend *file, const char *filename,
         return ret;
     }
 
-    drv = bdrv_probe_all(buf, sizeof(buf), filename);
+    drv = bdrv_probe_all(buf, ret, filename);
     if (!drv) {
         error_setg(errp, "Could not determine image format: No compatible "
                    "driver found");
-        *pdrv = NULL;
-        return -ENOENT;
+        ret = -ENOENT;
     }
-
     *pdrv = drv;
-    return 0;
+    return ret;
 }
 
 /**
@@ -6300,7 +6298,7 @@ const char *bdrv_get_device_or_node_name(const BlockDriverState *bs)
 
 int bdrv_get_flags(BlockDriverState *bs)
 {
-    IO_CODE();
+    GLOBAL_STATE_CODE();
     return bs->open_flags;
 }
 

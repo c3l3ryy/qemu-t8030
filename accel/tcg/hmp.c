@@ -4,6 +4,7 @@
 #include "qapi/qapi-commands-machine.h"
 #include "exec/exec-all.h"
 #include "monitor/monitor.h"
+#include "sysemu/tcg.h"
 
 static void hmp_tcg_register(void)
 {

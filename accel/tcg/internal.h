@@ -14,7 +14,8 @@
 TranslationBlock *tb_gen_code(CPUState *cpu, target_ulong pc,
                               target_ulong cs_base, uint32_t flags,
                               int cflags);
-G_NORETURN void cpu_io_recompile(CPUState *cpu, uintptr_t retaddr);
+
+void QEMU_NORETURN cpu_io_recompile(CPUState *cpu, uintptr_t retaddr);
 void page_init(void);
 void tb_htable_init(void);
 

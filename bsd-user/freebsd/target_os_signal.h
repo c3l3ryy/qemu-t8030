@@ -1,5 +1,5 @@
-#ifndef TARGET_OS_SIGNAL_H
-#define TARGET_OS_SIGNAL_H
+#ifndef _TARGET_OS_SIGNAL_H_
+#define _TARGET_OS_SIGNAL_H_
 
 #include "target_os_siginfo.h"
 #include "target_arch_signal.h"
@@ -78,4 +78,4 @@ abi_long setup_sigframe_arch(CPUArchState *env, abi_ulong frame_addr,
 #define TARGET_SS_ONSTACK 0x0001  /* take signals on alternate stack */
 #define TARGET_SS_DISABLE 0x0004  /* disable taking signals on alternate stack*/
 
-#endif /* TARGET_OS_SIGNAL_H */
+#endif /* !_TARGET_OS_SIGNAL_H_ */

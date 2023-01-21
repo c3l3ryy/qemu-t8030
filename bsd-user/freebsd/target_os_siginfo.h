@@ -16,9 +16,8 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
-
-#ifndef TARGET_OS_SIGINFO_H
-#define TARGET_OS_SIGINFO_H
+#ifndef _TARGET_OS_SIGINFO_H_
+#define _TARGET_OS_SIGINFO_H_
 
 #define TARGET_NSIG         128
 #define TARGET_NSIG_BPW     (sizeof(uint32_t) * 8)
@@ -156,4 +155,4 @@ struct target_sigevent {
 #define TARGET_FPE_FLTINV   (7) /* Invalid floating point operation. */
 #define TARGET_FPE_FLTSUB   (8) /* Subscript out of range. */
 
-#endif /* TARGET_OS_SIGINFO_H */
+#endif /* !_TARGET_OS_SIGINFO_H_ */

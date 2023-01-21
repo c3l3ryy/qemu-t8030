@@ -17,8 +17,8 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef TARGET_OS_STACK_H
-#define TARGET_OS_STACK_H
+#ifndef _TARGET_OS_STACK_H_
+#define _TARGET_OS_STACK_H_
 
 #include "target_arch_sigtramp.h"
 
@@ -53,4 +53,4 @@ static inline int setup_initial_stack(struct bsd_binprm *bprm, abi_ulong *p,
     return 0;
 }
 
-#endif /* TARGET_OS_STACK_H */
+#endif /* !_TARGET_OS_STACK_H_ */

@@ -1,30 +1,32 @@
 check-patch:
-  extends: .base_job_template
   stage: build
-  image: python:3.10-alpine
-  needs: []
+  image: $CI_REGISTRY_IMAGE/qemu/centos8:latest
+  needs:
+    job: amd64-centos8-container
   script:
     - .gitlab-ci.d/check-patch.py
   variables:
     GIT_DEPTH: 1000
-    QEMU_JOB_ONLY_FORKS: 1
-  before_script:
-    - apk -U add git perl
-  allow_failure: true
+  rules:
+    - if: '$CI_PROJECT_NAMESPACE == "qemu-project"'
+      when: never
+    - when: on_success
+      allow_failure: true
 
 check-dco:
-  extends: .base_job_template
   stage: build
-  image: python:3.10-alpine
-  needs: []
+  image: $CI_REGISTRY_IMAGE/qemu/centos8:latest
+  needs:
+    job: amd64-centos8-container
   script: .gitlab-ci.d/check-dco.py
   variables:
     GIT_DEPTH: 1000
-  before_script:
-    - apk -U add git
+  rules:
+    - if: '$CI_PROJECT_NAMESPACE == "qemu-project" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+      when: never
+    - when: on_success
 
 check-python-pipenv:
-  extends: .base_job_template
   stage: test
   image: $CI_REGISTRY_IMAGE/qemu/python:latest
   script:
@@ -35,7 +37,6 @@ check-python-pipenv:
     job: python-container
 
 check-python-tox:
-  extends: .base_job_template
   stage: test
   image: $CI_REGISTRY_IMAGE/qemu/python:latest
   script:
@@ -43,6 +44,8 @@ check-python-tox:
   variables:
     GIT_DEPTH: 1
     QEMU_TOX_EXTRA_ARGS: --skip-missing-interpreters=false
-    QEMU_JOB_OPTIONAL: 1
   needs:
     job: python-container
+  rules:
+    - when: manual
+  allow_failure: true

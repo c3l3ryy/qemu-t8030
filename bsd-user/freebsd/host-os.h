@@ -17,9 +17,9 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef HOST_OS_H
-#define HOST_OS_H
+#ifndef _HOST_OS_H_
+#define _HOST_OS_H_
 
 #define HOST_DEFAULT_BSD_TYPE target_freebsd
 
-#endif /* HOST_OS_H */
+#endif /*!_HOST_OS_H_ */

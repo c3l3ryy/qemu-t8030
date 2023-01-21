@@ -122,7 +122,7 @@ static size_t dbus_put_buffer_out(HWVoiceOut *hw, void *buf, size_t size)
     return size;
 }
 
-#if HOST_BIG_ENDIAN
+#ifdef HOST_WORDS_BIGENDIAN
 #define AUDIO_HOST_BE TRUE
 #else
 #define AUDIO_HOST_BE FALSE

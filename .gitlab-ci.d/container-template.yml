@@ -1,5 +1,4 @@
 .container_job_template:
-  extends: .base_job_template
   image: docker:stable
   stage: containers
   services:

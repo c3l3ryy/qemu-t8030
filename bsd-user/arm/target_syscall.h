@@ -17,8 +17,8 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ARM_TARGET_SYSCALL_H
-#define ARM_TARGET_SYSCALL_H
+#ifndef _TARGET_ARCH_SYSCALL_H_
+#define _TARGET_ARCH_SYSCALL_H_
 
 struct target_pt_regs {
     abi_long uregs[17];
@@ -52,4 +52,4 @@ struct target_pt_regs {
 #define TARGET_HW_MACHINE       "arm"
 #define TARGET_HW_MACHINE_ARCH  "armv7"
 
-#endif /* ARM_TARGET_SYSCALL_H */
+#endif /* !_TARGET_ARCH_SYSCALL_H_ */

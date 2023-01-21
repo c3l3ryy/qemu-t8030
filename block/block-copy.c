@@ -883,42 +883,23 @@ static int coroutine_fn block_copy_common(BlockCopyCallState *call_state)
     return ret;
 }
 
-static void coroutine_fn block_copy_async_co_entry(void *opaque)
-{
-    block_copy_common(opaque);
-}
-
 int coroutine_fn block_copy(BlockCopyState *s, int64_t start, int64_t bytes,
-                            bool ignore_ratelimit, uint64_t timeout_ns,
-                            BlockCopyAsyncCallbackFunc cb,
-                            void *cb_opaque)
+                            bool ignore_ratelimit)
 {
-    int ret;
-    BlockCopyCallState *call_state = g_new(BlockCopyCallState, 1);
-
-    *call_state = (BlockCopyCallState) {
+    BlockCopyCallState call_state = {
         .s = s,
         .offset = start,
         .bytes = bytes,
         .ignore_ratelimit = ignore_ratelimit,
         .max_workers = BLOCK_COPY_MAX_WORKERS,
-        .cb = cb,
-        .cb_opaque = cb_opaque,
     };
 
-    ret = qemu_co_timeout(block_copy_async_co_entry, call_state, timeout_ns,
-                          g_free);
-    if (ret < 0) {
-        assert(ret == -ETIMEDOUT);
-        block_copy_call_cancel(call_state);
-        /* call_state will be freed by running coroutine. */
-        return ret;
-    }
+    return block_copy_common(&call_state);
+}
 
-    ret = call_state->ret;
-    g_free(call_state);
-
-    return ret;
+static void coroutine_fn block_copy_async_co_entry(void *opaque)
+{
+    block_copy_common(opaque);
 }
 
 BlockCopyCallState *block_copy_async(BlockCopyState *s,

@@ -15,9 +15,8 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
-
-#ifndef TARGET_ARCH_SIGNAL_H
-#define TARGET_ARCH_SIGNAL_H
+#ifndef _TARGET_ARCH_SIGNAL_H_
+#define _TARGET_ARCH_SIGNAL_H_
 
 #include "cpu.h"
 
@@ -97,4 +96,4 @@ struct target_sigframe {
     uint32_t    __spare__[2];
 };
 
-#endif /* TARGET_ARCH_SIGNAL_H */
+#endif /* !TARGET_ARCH_SIGNAL_H_ */

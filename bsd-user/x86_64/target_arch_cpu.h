@@ -16,8 +16,8 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef TARGET_ARCH_CPU_H
-#define TARGET_ARCH_CPU_H
+#ifndef _TARGET_ARCH_CPU_H_
+#define _TARGET_ARCH_CPU_H_
 
 #include "target_arch.h"
 #include "signal-common.h"
@@ -174,4 +174,4 @@ static inline void target_cpu_reset(CPUArchState *env)
     cpu_reset(env_cpu(env));
 }
 
-#endif /* TARGET_ARCH_CPU_H */
+#endif /* ! _TARGET_ARCH_CPU_H_ */
